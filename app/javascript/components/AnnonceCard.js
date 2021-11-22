@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const AnnonceCard = () => {
   return (
@@ -17,9 +18,9 @@ const AnnonceCard = () => {
         </div>
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
           <div className="text-center">
-            <a className="btn btn-outline-dark mt-auto" href="#">
+            <Link className="btn btn-outline-dark mt-auto" to="/annonces/1">
               Voir annonce
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -5,18 +5,22 @@ import Navbar from '../components/Navbar';
 import Home from '../components/Home';
 import Annonce from '../components/Annonce';
 import AnnonceForm from '../components/AnnonceForm';
+import Footer from '../components/Footer';
 
 function App() {
   return (
     <React.StrictMode>
-      <Router>
-        <Navbar />
-        <Routes>
-          <Route path="/" exact element={<Home />} />
-          <Route path="/annonces/:id" exact element={<Annonce />} />
-          <Route path="/annonces/new" exact element={<AnnonceForm />} />
-        </Routes>
-      </Router>
+      <div className="d-flex flex-column min-vh-100">
+        <Router>
+          <Navbar />
+          <Routes>
+            <Route path="/" exact element={<Home />} />
+            <Route path="/annonces/:id" exact element={<Annonce />} />
+            <Route path="/annonces/new" exact element={<AnnonceForm />} />
+          </Routes>
+        </Router>
+        <Footer />
+      </div>
     </React.StrictMode>
   );
 }
