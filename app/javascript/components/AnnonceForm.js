@@ -41,7 +41,7 @@ const AnnonceForm = () => {
             <button type="submit" className="btn btn-dark mt-3 me-2">
               Créer l'annonce
             </button>
-            <Link to="/" className="btn btn-outline-dark mt-3">
+            <Link to="/" className="btn mt-3">
               Revenir vers l'accueil
             </Link>
           </form>
