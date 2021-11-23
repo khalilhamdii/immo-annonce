@@ -11,7 +11,7 @@ const AnnonceForm = () => {
           </h1>
           <form>
             <div className="form-group my-4">
-              <label htmlFor="annonceTitle">Titre de l'annonce</label>
+              <label htmlFor="annonceTitle">Titre de l'annonce*</label>
               <input
                 type="text"
                 name="name"
@@ -21,7 +21,7 @@ const AnnonceForm = () => {
               />
             </div>
             <div className="form-group my-4">
-              <label htmlFor="annoncePrice">Prix</label>
+              <label htmlFor="annoncePrice">Prix*</label>
               <input
                 type="text"
                 name="ingredients"
@@ -30,7 +30,18 @@ const AnnonceForm = () => {
                 required
               />
             </div>
-            <label htmlFor="description">Description</label>
+            <div className="form-group my-4">
+              <label htmlFor="annoncePrice">Ajouter une photo*</label>
+              <input
+                type="file"
+                name="image"
+                id="image"
+                className="form-control"
+                accept="image/*"
+                required
+              />
+            </div>
+            <label htmlFor="description">Description*</label>
             <textarea
               className="form-control"
               id="description"
