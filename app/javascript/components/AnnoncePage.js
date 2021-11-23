@@ -11,7 +11,7 @@ const AnnoncePage = () => {
     description: '',
   });
 
-  const getAnnonce = () => {
+  const apiGetAnnonce = () => {
     const url = `/api/v1/annonces/${id}`;
 
     axios
@@ -24,7 +24,7 @@ const AnnoncePage = () => {
       .catch((error) => console.log('error:', error));
   };
 
-  const handleDeleteAnnonce = (id) => {
+  const apiDeleteAnnonce = (id) => {
     const url = `/api/v1/annonces/${id}`;
     const token = document.querySelector('meta[name="csrf-token"]').content;
     axios
@@ -44,7 +44,7 @@ const AnnoncePage = () => {
   };
 
   useEffect(() => {
-    getAnnonce();
+    apiGetAnnonce();
   }, []);
 
   return (
@@ -68,7 +68,7 @@ const AnnoncePage = () => {
           </div>
           <p className="lead">{annonce.description}</p>
           <button
-            onClick={() => handleDeleteAnnonce(annonce.id)}
+            onClick={() => apiDeleteAnnonce(annonce.id)}
             className="btn btn-danger mt-4"
             type="button"
           >
