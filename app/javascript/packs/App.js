@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 
 import Navbar from '../components/Navbar';
 import Home from '../components/Home';
-import Annonce from '../components/Annonce';
+import AnnoncePage from '../components/AnnoncePage';
 import AnnonceForm from '../components/AnnonceForm';
 import Footer from '../components/Footer';
 
@@ -15,7 +15,7 @@ function App() {
           <Navbar />
           <Routes>
             <Route path="/" exact element={<Home />} />
-            <Route path="/annonces/:id" exact element={<Annonce />} />
+            <Route path="/annonces/:id" exact element={<AnnoncePage />} />
             <Route path="/annonces/new" exact element={<AnnonceForm />} />
           </Routes>
         </Router>
