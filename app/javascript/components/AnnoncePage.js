@@ -27,6 +27,7 @@ const AnnoncePage = () => {
             alias magni, accusamus eius blanditiis delectus ipsam minima ea iste
             laborum vero?
           </p>
+          <button className="btn btn-danger mt-4">Supprimer l'annonce</button>
         </div>
       </div>
     </div>
