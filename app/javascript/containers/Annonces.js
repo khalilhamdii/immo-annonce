@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import axios from 'axios';
 import AnnonceCard from '../components/AnnonceCard';
 
 const Annonces = () => {
@@ -6,15 +7,14 @@ const Annonces = () => {
 
   const getAnnonces = () => {
     const url = '/api/v1/annonces/';
-    fetch(url)
+    axios
+      .get(url)
       .then((response) => {
-        if (response.ok) {
-          return response.json();
+        if (response.status === 200) {
+          setAnnonces(response.data);
         }
-        throw new Error('Network response was not ok.');
       })
-      .then((response) => setAnnonces(response))
-      .catch(() => this.props.history.push('/'));
+      .catch((error) => console.log('error:', error));
   };
 
   useEffect(() => {

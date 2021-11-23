@@ -1,4 +1,4 @@
-8.times do |i|
+(1..8).each do |i|
   Annonce.create(
     title: "Annonce #{i + 1}",
     price: 10000 * i,

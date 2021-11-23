@@ -1,7 +1,32 @@
-import React from 'react';
-import { Link } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
+import { Link, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const AnnoncePage = () => {
+  const { id } = useParams();
+  const [annonce, setAnnonce] = useState({
+    title: '',
+    price: '',
+    description: '',
+  });
+
+  const getAnnonce = () => {
+    const url = `/api/v1/annonces/${id}`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status === 200) {
+          setAnnonce(response.data);
+        }
+      })
+      .catch((error) => console.log('error:', error));
+  };
+
+  useEffect(() => {
+    getAnnonce();
+  }, []);
+
   return (
     <div className="container px-4 px-lg-5 my-5">
       <Link to="/" className="btn mb-2">
@@ -12,21 +37,16 @@ const AnnoncePage = () => {
         <div className="col-md-6">
           <img
             className="card-img-top mb-5 mb-md-0"
-            src="https://dummyimage.com/600x700/dee2e6/6c757d.jpg"
-            alt="..."
+            src={annonce.image}
+            alt={annonce.title}
           />
         </div>
         <div className="col-md-6">
-          <h1 className="display-5 fw-bolder">Appartement</h1>
+          <h1 className="display-5 fw-bolder">{annonce.title}</h1>
           <div className="fs-5 mb-5">
-            <span>$40.00</span>
+            <span>{annonce.price}€</span>
           </div>
-          <p className="lead">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Praesentium
-            at dolorem quidem modi. Nam sequi consequatur obcaecati excepturi
-            alias magni, accusamus eius blanditiis delectus ipsam minima ea iste
-            laborum vero?
-          </p>
+          <p className="lead">{annonce.description}</p>
           <button className="btn btn-danger mt-4">Supprimer l'annonce</button>
         </div>
       </div>

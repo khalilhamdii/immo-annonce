@@ -15,7 +15,10 @@ const AnnonceCard = (props) => {
         </div>
         <div className="card-footer p-4 pt-0 border-top-0 bg-transparent">
           <div className="text-center">
-            <Link className="btn btn-outline-dark mt-auto" to="/annonces/1">
+            <Link
+              className="btn btn-outline-dark mt-auto"
+              to={`/annonces/${annonce.id}`}
+            >
               Voir annonce
             </Link>
           </div>
