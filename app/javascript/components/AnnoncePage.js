@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 const AnnoncePage = () => {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [annonce, setAnnonce] = useState({
     title: '',
     price: '',
@@ -21,6 +22,25 @@ const AnnoncePage = () => {
         }
       })
       .catch((error) => console.log('error:', error));
+  };
+
+  const handleDeleteAnnonce = (id) => {
+    const url = `/api/v1/annonces/${id}`;
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+    axios
+      .delete(url, {
+        headers: {
+          'X-CSRF-Token': token,
+          'Content-Type': 'application/json',
+        },
+      })
+      .then((response) => {
+        if (response.data.status === 'deleted') {
+          console.log(response.data.message);
+          navigate('/');
+        }
+      })
+      .catch((error) => console.log('api errors:', error));
   };
 
   useEffect(() => {
@@ -47,7 +67,14 @@ const AnnoncePage = () => {
             <span>{annonce.price}€</span>
           </div>
           <p className="lead">{annonce.description}</p>
-          <button className="btn btn-danger mt-4">Supprimer l'annonce</button>
+          <button
+            onClick={() => handleDeleteAnnonce(annonce.id)}
+            className="btn btn-danger mt-4"
+            type="button"
+          >
+            <i className="bi bi-trash-fill me-2"></i>
+            Supprimer l'annonce
+          </button>
         </div>
       </div>
     </div>

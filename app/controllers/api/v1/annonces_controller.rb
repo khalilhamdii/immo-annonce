@@ -40,16 +40,11 @@ class Api::V1::AnnoncesController < ApplicationController
 
   # DELETE /api/v1/annonces/:id
   def destroy
-    begin
       @annonce.destroy
       render json: {
-        status: 'Annonce supprimée'
+        status: 'deleted',
+        message: 'Annonce supprimée'
       }
-    rescue
-      render json: {
-        status: "Erreur lors de la suppression de l'annonce"
-      }
-    end
   end
 
   private
