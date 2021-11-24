@@ -33,6 +33,7 @@ gem 'react-rails', '~> 2.6', '>= 2.6.1'
 gem 'active_storage_validations', '~> 0.9.5'
 gem 'file_validators', '~> 3.0'
 gem 'active_model_serializers', '~> 0.10.12'
+gem 'cloudinary', '~> 1.21'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
