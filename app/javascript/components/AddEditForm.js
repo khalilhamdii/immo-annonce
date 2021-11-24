@@ -83,16 +83,16 @@ const AddEditForm = () => {
   useEffect(() => {
     if (isAddMode) {
       register('title', {
-        required: true,
+        required: 'This is required',
       });
       register('price', {
-        required: true,
+        required: 'This is required',
       });
       register('description', {
-        required: true,
+        required: 'This is required',
       });
       register('image', {
-        required: true,
+        required: 'This is required',
       });
     } else {
       updateFormFields();
@@ -206,7 +206,7 @@ const AddEditForm = () => {
                 ))
               }
             </ErrorMessage>
-            <div className="btn-group">
+            <div className="btn-group d-block">
               <button type="submit" className="btn btn-dark mt-3 me-2">
                 {isAddMode ? "Créer l'annonce" : "Editer l'annonce"}
               </button>

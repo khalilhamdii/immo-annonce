@@ -17,13 +17,10 @@
 ## Built With 🛠
 
 ```
+- Ruby On Rails
 - React.js
-- Redux
-- Node.js
 - ES6
 - Bootstrap
-- HTML
-- CSS
 ```
 
 ## Setup ⏳
@@ -32,10 +29,13 @@
 
 1. - [ ] Open your `Terminal`.
 2. - [ ] Navigate to the directory where you will like to install the repo by running `cd FOLDER-NAME`
-3. - [ ] Run `git clone git@github.com:khalilhamdii/easy_rent_frontend.git` in the terminal to download.
-4. - [ ] Run `cd easy_rent_frontend` to enter directory.
-5. - [ ] Run `npm install` to install node packages and dependencies.
-6. - [ ] Run `npm start` in your browser to start the application.
+3. - [ ] Run `git clone git@github.com:khalilhamdii/immo-annonce.git` in the terminal to download.
+4. - [ ] Run `cd immo-annonce` to enter directory.
+5. - [ ] Run `bundle install` to install ruby gems and dependencies.
+6. - [ ] Run `yarn install` to install node packages and dependencies.
+7. - [ ] Run `rails s` to start the rails server.
+8. - [ ] Run `yarn run dev-server` to run webpack dev server.
+9. - [ ] Open `localhost:3000`.
 
 ## Authors
 
