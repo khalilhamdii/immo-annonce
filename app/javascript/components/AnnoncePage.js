@@ -56,7 +56,7 @@ const AnnoncePage = () => {
       <div className="row gx-4 gx-lg-5 align-items-center">
         <div className="col-md-6">
           <img
-            className="card-img-top mb-5 mb-md-0"
+            className="card-img-top custom-view-img mb-5 mb-md-0"
             src={annonce.image}
             alt={annonce.title}
           />
@@ -67,14 +67,23 @@ const AnnoncePage = () => {
             <span>{annonce.price}€</span>
           </div>
           <p className="lead">{annonce.description}</p>
-          <button
-            onClick={() => apiDeleteAnnonce(annonce.id)}
-            className="btn btn-danger mt-4"
-            type="button"
-          >
-            <i className="bi bi-trash-fill me-2"></i>
-            Supprimer l'annonce
-          </button>
+          <div className="btn-group mt-4">
+            <Link
+              to={`/annonces/edit/${annonce.id}`}
+              className="btn btn-outline-dark me-2"
+            >
+              <i className="bi-pencil-fill me-2" />
+              Editer l'annonce
+            </Link>
+            <button
+              onClick={() => apiDeleteAnnonce(annonce.id)}
+              className="btn btn-danger"
+              type="button"
+            >
+              <i className="bi bi-trash-fill me-2"></i>
+              Supprimer l'annonce
+            </button>
+          </div>
         </div>
       </div>
     </div>

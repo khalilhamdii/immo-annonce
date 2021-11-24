@@ -1,17 +1,36 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 
-const AnnonceForm = () => {
+const AddEditForm = () => {
+  const { id } = useParams();
+  const navigate = useNavigate();
+  const isAddMode = !id;
+
   const {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm();
 
-  const navigate = useNavigate();
+  const updateFormFields = () => {
+    const url = `/api/v1/annonces/${id}`;
+
+    axios
+      .get(url)
+      .then((response) => {
+        if (response.status === 200) {
+          const annonce = response.data;
+          setValue('title', annonce.title);
+          setValue('price', annonce.price);
+          setValue('description', annonce.description);
+        }
+      })
+      .catch((error) => console.log('error:', error));
+  };
 
   const apiAddAnnonce = (data) => {
     const token = document.querySelector('meta[name="csrf-token"]').content;
@@ -31,21 +50,61 @@ const AnnonceForm = () => {
       })
       .catch((error) => console.log('api errors:', error));
   };
+
+  const apiUpdateAnnonce = (data) => {
+    const token = document.querySelector('meta[name="csrf-token"]').content;
+    const url = `/api/v1/annonces/${id}`;
+    axios
+      .patch(url, data, {
+        headers: {
+          'X-CSRF-Token': token,
+          'content-type': 'multipart/form-data',
+        },
+      })
+      .then((response) => {
+        if (response.statusText === 'Accepted') {
+          navigate(`/annonces/${response.data.id}`);
+        }
+      })
+      .catch((error) => console.log('api errors:', error));
+  };
+
   const onSubmit = (data) => {
     const formData = new FormData();
     formData.append('title', data.title);
     formData.append('price', data.price);
     formData.append('description', data.description);
-    formData.append('image', data.image[0]);
-    console.log(formData);
-    apiAddAnnonce(formData);
+    if (data.image.length > 0) {
+      formData.append('image', data.image[0]);
+    }
+    return isAddMode ? apiAddAnnonce(formData) : apiUpdateAnnonce(formData);
   };
+
+  useEffect(() => {
+    if (isAddMode) {
+      register('title', {
+        required: true,
+      });
+      register('price', {
+        required: true,
+      });
+      register('description', {
+        required: true,
+      });
+      register('image', {
+        required: true,
+      });
+    } else {
+      updateFormFields();
+    }
+  }, []);
+
   return (
     <div className="container mt-5">
       <div className="row">
         <div className="col-sm-12 col-lg-8 offset-lg-2">
           <h1 className="font-weight-normal mb-5">
-            Ajouter une nouvelle annonce!
+            {isAddMode ? 'Ajouter une nouvelle annonce!' : "Editer l'annonce"}
           </h1>
           <form onSubmit={handleSubmit(onSubmit)}>
             <div className="form-group my-4">
@@ -56,7 +115,6 @@ const AnnonceForm = () => {
                 id="title"
                 className="form-control"
                 {...register('title', {
-                  required: 'This is required',
                   maxLength: {
                     value: 20,
                     message: 'This input exceed maximum length.',
@@ -86,7 +144,6 @@ const AnnonceForm = () => {
                 id="price"
                 className="form-control"
                 {...register('price', {
-                  required: 'This is required',
                   max: {
                     value: 10000000,
                     message: 'This input exceed maximum length.',
@@ -116,9 +173,7 @@ const AnnonceForm = () => {
                 id="image"
                 className="form-control"
                 accept="image/*"
-                {...register('image', {
-                  required: true,
-                })}
+                {...register('image')}
               />
               {errors.image && errors.image.type === 'required' && (
                 <p>This is required</p>
@@ -131,7 +186,6 @@ const AnnonceForm = () => {
               name="description"
               rows="5"
               {...register('description', {
-                required: 'This is required',
                 maxLength: {
                   value: 500,
                   message: 'This input exceed maximum length.',
@@ -154,7 +208,7 @@ const AnnonceForm = () => {
             </ErrorMessage>
             <div className="btn-group">
               <button type="submit" className="btn btn-dark mt-3 me-2">
-                Créer l'annonce
+                {isAddMode ? "Créer l'annonce" : "Editer l'annonce"}
               </button>
               <Link to="/" className="btn mt-3">
                 Revenir vers l'accueil
@@ -167,4 +221,4 @@ const AnnonceForm = () => {
   );
 };
 
-export default AnnonceForm;
+export default AddEditForm;
