@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { useForm } from 'react-hook-form';
 import { ErrorMessage } from '@hookform/error-message';
 import { Link, useNavigate, useParams } from 'react-router-dom';
@@ -100,8 +100,8 @@ const AddEditForm = () => {
   }, []);
 
   return (
-    <div className="container mt-5">
-      <div className="row">
+    <div className="container mt-4">
+      <div className="row mb-2">
         <div className="col-sm-12 col-lg-8 offset-lg-2">
           <h1 className="font-weight-normal mb-5">
             {isAddMode ? 'Ajouter une nouvelle annonce!' : "Editer l'annonce"}
